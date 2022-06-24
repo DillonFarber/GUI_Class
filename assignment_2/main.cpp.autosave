@@ -1,0 +1,18 @@
+#include "mainwindow.h"
+
+#include <QApplication>
+#include <QFile>
+#include<QQMLA
+#include <QQickStyle>
+
+
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    MainWindow w;
+    QFile file("styleSheet.qrc");
+    
+    w.show();
+    return a.exec();
+}

@@ -1,0 +1,17 @@
+# ninja log v5
+7	203	6768803282342584	assignment_2_autogen/timestamp	854a445fa9f37550
+257	1809	6767023630351103	CMakeFiles/assignment_2.dir/radiobutton.cpp.obj	63d2ff2c1ac16a2a
+7	203	6768803282342584	assignment_2_autogen/mocs_compilation.cpp	854a445fa9f37550
+1725	2028	6768803300558259	assignment_2.exe	caab20eaf32e4bf2
+7	203	6768803282342584	C:/Users/dillo/Mygithub/GUI Class/build-assignment_2-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/assignment_2_autogen/timestamp	854a445fa9f37550
+7	203	6768803282342584	C:/Users/dillo/Mygithub/GUI Class/build-assignment_2-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/assignment_2_autogen/mocs_compilation.cpp	854a445fa9f37550
+671	2201	6767133983148317	CMakeFiles/assignment_2.dir/main.cpp.obj	f58b0207139354b0
+668	2309	6767133984239252	CMakeFiles/assignment_2.dir/assignment_2_autogen/mocs_compilation.cpp.obj	77d8d53123e4e7c
+214	1725	6768803297555676	CMakeFiles/assignment_2.dir/mainwindow.cpp.obj	37ba3e43b4983d2d
+0	16	0	CMakeFiles/clean.additional	baedbe210acaa455
+16	21	0	clean	577b940aee94fbd7
+669	2228	6767133983418548	CMakeFiles/assignment_2.dir/conversions.cpp.obj	db4cfc9771972e8b
+9	218	6777261103366445	assignment_2_autogen/timestamp	854a445fa9f37550
+9	218	6777261103366445	assignment_2_autogen/mocs_compilation.cpp	854a445fa9f37550
+9	218	6777261103366445	C:/Users/dillo/Mygithub/GUI Class/build-assignment_2-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/assignment_2_autogen/timestamp	854a445fa9f37550
+9	218	6777261103366445	C:/Users/dillo/Mygithub/GUI Class/build-assignment_2-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/assignment_2_autogen/mocs_compilation.cpp	854a445fa9f37550

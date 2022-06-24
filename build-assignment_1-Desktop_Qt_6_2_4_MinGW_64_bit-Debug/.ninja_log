@@ -1,0 +1,14 @@
+# ninja log v5
+0	147	6775313101843700	assignment_1_autogen/timestamp	27daa913c6a81abe
+0	147	6775313101843700	assignment_1_autogen/mocs_compilation.cpp	27daa913c6a81abe
+0	147	6775313101843700	C:/Users/dillo/Mygithub/GUI Class/build-assignment_1-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/assignment_1_autogen/timestamp	27daa913c6a81abe
+0	147	6775313101843700	C:/Users/dillo/Mygithub/GUI Class/build-assignment_1-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/assignment_1_autogen/mocs_compilation.cpp	27daa913c6a81abe
+147	196	6775313102899600	CMakeFiles/assignment_1.dir/assignment_1_autogen/mocs_compilation.cpp.obj	fef1bedc80a0d3c
+149	625	6775313107183283	CMakeFiles/assignment_1.dir/main.cpp.obj	5023d958c42742d
+626	782	6775313108729609	assignment_1.exe	f57bab10e96b383f
+3	110	6775454930175599	assignment_1_autogen/timestamp	27daa913c6a81abe
+3	110	6775454930175599	assignment_1_autogen/mocs_compilation.cpp	27daa913c6a81abe
+3	110	6775454930175599	C:/Users/dillo/Mygithub/GUI Class/build-assignment_1-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/assignment_1_autogen/timestamp	27daa913c6a81abe
+3	110	6775454930175599	C:/Users/dillo/Mygithub/GUI Class/build-assignment_1-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/assignment_1_autogen/mocs_compilation.cpp	27daa913c6a81abe
+114	596	6775454935044778	CMakeFiles/assignment_1.dir/main.cpp.obj	5023d958c42742d
+596	728	6775454936335887	assignment_1.exe	f57bab10e96b383f

@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "assignment_1",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "assignment_1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-assignment_1-Debug-d3be816a637883f4865a.json",
+					"name" : "assignment_1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "assignment_1_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-assignment_1_autogen-Debug-206f6c3015ab72123881.json",
+					"name" : "assignment_1_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "assignment_1_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-assignment_1_autogen_timestamp_deps-Debug-30ebfa7b148a3788a438.json",
+					"name" : "assignment_1_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/dillo/Mygithub/GUI Class/build-assignment_1-Desktop_Qt_6_2_4_MinGW_64_bit-Debug",
+		"source" : "C:/Users/dillo/Mygithub/GUI Class/assignment_1"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

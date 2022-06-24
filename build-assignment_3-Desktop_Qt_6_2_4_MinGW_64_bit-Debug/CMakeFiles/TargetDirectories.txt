@@ -1,0 +1,5 @@
+C:/Users/dillo/Mygithub/GUI Class/build-assignment_3-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/CMakeFiles/assignment_3.dir
+C:/Users/dillo/Mygithub/GUI Class/build-assignment_3-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+C:/Users/dillo/Mygithub/GUI Class/build-assignment_3-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/dillo/Mygithub/GUI Class/build-assignment_3-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/CMakeFiles/assignment_3_autogen_timestamp_deps.dir
+C:/Users/dillo/Mygithub/GUI Class/build-assignment_3-Desktop_Qt_6_2_4_MinGW_64_bit-Debug/CMakeFiles/assignment_3_autogen.dir

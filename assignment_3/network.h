@@ -12,7 +12,7 @@ private:
     NetworkMessage messages[10];
     Station stations[3];
     int distance;
-    int sensingDistance;
+    int sensingTick;
     int runTime;
     int numMessages = 0;
     int lengthOfMessage;

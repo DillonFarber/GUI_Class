@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "conversions.h"
+#include "network.h"
 
 #include <QGridLayout>
 #include <QLabel>

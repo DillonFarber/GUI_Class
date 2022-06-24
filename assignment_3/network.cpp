@@ -23,13 +23,14 @@ void network::checkSending(int curTick, int stationID)
             {
                 stations[stationID].isIdle = false;
                 stations[stationID].isSending = true;
+                stations[stationID].sendingCount = messages[i].messagelen;
             }
     }
 }
 
 void network::convertProbability()
 {
-
+    this->probOfMessage = this->probOfMessage / 100.00;
 }
 
 void network::sensingDownCarrier(int curTick, int stationID)
@@ -54,6 +55,7 @@ void network::sensingDownCarrier(int curTick, int stationID)
                 }
                 else
                     howFar = lengthOfMessage;
+
                 int position = howFar - distTraveled;
                 if(position < this->sensingDistance)
                 {
@@ -72,42 +74,48 @@ void network::sensingDownCarrier(int curTick, int stationID)
                     stations[stationID].isPassing = false;
                 }
             }
-
         }
     }
 }
 
-void network::sensingCarrier(int curTick, int stationsID)
+void network::sensingCarrier(int curTick, int stationID)
 {
     for(int i = 0; i < 10; i++)
     {
         if(!messages[i].isEmpty)
         {
-            if(messages[i].sendingStation != stationsID && messages[i].timeOfSending < curTick)
+            if(messages[i].sendingStation != stationID && messages[i].timeOfSending < curTick)
             {
-                if(messages[i].recievingStation == stationsID && messages[i].timeOfRecieving == curTick)
+                if(messages[i].recievingStation == stationID && messages[i].timeOfRecieving == curTick)
                 {
-                    stations[stationsID].isRecieving = true;
-                    stations[stationsID].isIdle = false;
+                    stations[stationID].isRecieving = true;
+                    stations[stationID].isIdle = false;
+                    stations[stationID].recievingCount = messages[i].messagelen - 1;
                 }
-                else if(messages[i].recievingStation != stationsID && curTick > messages[i].timeOfSending)
+                else if(curTick > messages[i].timeOfSending)
                 {
-                    if(stationsID == 1)
+                    if(stationID == 1 && stationID != messages[i].recievingStation)
                     {
-                        if(stations[stationsID].passingTick != curTick)
+                        if(stations[stationID].passingTick == -1)
                         {
-                        int passingTick = messages[i].timeOfSending + this->lengthOfMessage;
-                        if(passingTick == curTick)
-                        {
-                            stations[stationsID].isIdle = false;
-                            stations[stationsID].isPassing = true;
-                            stations[stationsID].passingTick = passingTick;
+                            int passingTick = messages[i].timeOfSending + this->lengthOfMessage;
+                            if(passingTick == curTick)
+                            {
+                                stations[stationID].isIdle = false;
+                                stations[stationID].isPassing = true;
+                                stations[stationID].passingTick = passingTick;
+                            }
+                            else
+                            {
+                                stations[stationID].isIdle = true;
+                                stations[stationID].passingTick = passingTick;
+                            }
                         }
-                        else
+                        else if(stations[stationID].passingTick < curTick)
                         {
-                            stations[stationsID].isIdle = true;
-                            stations[stationsID].passingTick = passingTick;
-                        }
+                            stations[stationID].isIdle = true;
+                            stations[stationID].isPassing = false;
+                            stations[stationID].passingTick = -1;
                         }
                     }
                 }
@@ -131,9 +139,9 @@ double network::probability()
 
 //slots
 
-void network::sensingDistanceTicks(int distance)
+void network::sensingDistanceTicks(int ticks)
 {
-    this->sensingDistance = distance;
+    this->sensingTick = ticks;
 }
 
 void network::lengthOfCable(int len)
@@ -173,16 +181,8 @@ void network::run()
     {
         for(int i = 0; i < 3; i++)
         {
-            if(stations[i].isSending)
-            {
-                stations[i].sendingCount--;
-                if(stations[i].sendingCount == 0)
-                {
-                    stations[i].isSending = false;
-                    stations[i].isIdle = true;
-                }
-            }
-
+            checkSending(tick, i);
+            sensingCarrier(tick, i);
             if(stations[i].isIdle)
             {
                 double numran = probability();
@@ -190,7 +190,7 @@ void network::run()
                 {
                     if(stations[i].isPassing && stations[i].passingTick == tick)
                     {
-                        addTickTime = getRandomNum(4) + 1;
+                        addTickTime = getRandomNum(this->sensingTick);
                         stations[i].isPassing = false;
                     }
                     else
@@ -223,23 +223,18 @@ void network::run()
                             }while(randomNum == i);
                             messages[j].recievingStation = randomNum;
                             messages[j].timeOfSending = tick + addTickTime;
-                            messages[j].timeOfRecieving = tick + (distance * (abs(randomNum - i))) + addTickTime;
-                            messages[j].messagelen = getRandomNum(3) + 1;
+                            messages[j].timeOfRecieving = tick + (this->distance * (abs(randomNum - i))) + addTickTime;
+                            messages[j].messagelen = getRandomNum(this->lengthOfMessage) + 1;
                             stations[i].isIdle = false;
                             if(messages[j].timeOfSending == tick)
                             {
-                                stations[i].sendingCount = messages[j].messagelen;
+                                stations[i].sendingCount = messages[j].messagelen - 1;
                                 stations[i].isSending = true;
                             }
                             else
-                            {
-                                stations[i].sendingCount = messages[j].messagelen + 1;
-                            }
-                            if(distance * (abs(randomNum - i)) > distance)
-                            {
-                                stations[1].isPassing = true;
-                                stations[1].passingTick = tick + distance;
-                            }
+                                stations[i].sendingCount = messages[j].messagelen;
+                            if(this->distance * (abs(randomNum - i)) > this->distance)
+                                stations[1].passingTick = tick + this->distance;
                             else
                             {
                                 if(messages[j].timeOfSending == tick)

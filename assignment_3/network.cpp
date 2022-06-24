@@ -57,13 +57,13 @@ void network::sensingDownCarrier(int curTick, int stationID)
                     howFar = lengthOfMessage;
 
                 int position = howFar - distTraveled;
-                if(position < this->sensingDistance)
+                if(position < this->sensingTick)
                 {
                     stations[stationID].isIdle = false;
                     stations[stationID].isPassing = true;
                 }
                 position = howFar - distFinish;
-                if(position <= this->sensingDistance)
+                if(position <= this->sensingTick)
                 {
                     stations[stationID].isIdle = false;
                     stations[stationID].isPassing = true;

@@ -15,6 +15,7 @@
 #include <QLineEdit>
 #include <QIntValidator>
 #include <QLCDNumber>
+#include <QPushButton>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -45,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     distSlider->setRange(7,99);
     distSlider->setTickPosition(QSlider::NoTicks);
     distSlider->setSingleStep(2);
-    connect(distSlider,SIGNAL(valueChanged(int)),lcdDist, SLOT(display(int)));
+    connect(distSlider,SIGNAL(valueChanged(int)),lcdDist, SLOT(display(int)))
 
 
     QLabel *messageLabel = new QLabel;
@@ -100,6 +101,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(totalTickLine, SIGNAL(returnPressed()), convert, SLOT(textToInt()));
     connect(convert, SIGNAL(intReturn(int)), lcdTotalTick, SLOT(display(int)));
+
+    QPushButton *runButton = new QPushButton();
+    runButton
 
 
     QGridLayout *layout = new QGridLayout;

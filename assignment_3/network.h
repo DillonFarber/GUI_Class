@@ -23,8 +23,10 @@ private:
     void convertProbability();
     void sensingDownCarrier(int, int);
     void sensingCarrier(int, int);
+    void checkAllSet();
 
 signals:
+    void allSet(bool);
 
 public slots:
     void sensingDistanceTicks(int);
@@ -35,7 +37,7 @@ public slots:
     void run();
 
 public:
-    network();
+    explicit network(QObject *parent = nullptr);
 };
 
 #endif // NETWORK_H

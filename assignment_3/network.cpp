@@ -3,6 +3,8 @@
 #include <cmath>
 #include <random>
 #include <fstream>
+#include <filesystem>
+#include <string>
 
 
 
@@ -16,15 +18,18 @@ network::network()
 
 void network::checkSending(int curTick, int stationID)
 {
-    for(int i = 0; i < 10; i++)
+    if(stations[stationID].isSending && stations->sendingTick <= curTick)
     {
-        if(!messages[i].isEmpty)
-            if(messages[i].sendingStation == stationID)
-            {
-                stations[stationID].isIdle = false;
-                stations[stationID].isSending = true;
-                stations[stationID].sendingCount = messages[i].messagelen;
-            }
+        if(stations[stationID].sendingCount != 0)
+        {
+            stations[stationID].sendingCount--;
+        }
+        else
+        {
+            stations[stationID].isIdle = true;
+            stations[stationID].isSending = false;
+            stations[stationID].sendingCount = -1;
+        }
     }
 }
 
@@ -92,6 +97,15 @@ void network::sensingCarrier(int curTick, int stationID)
                     stations[stationID].isIdle = false;
                     stations[stationID].recievingCount = messages[i].messagelen - 1;
                 }
+                else if(messages[i].recievingStation == stationID && stations[stationID].recievingCount > 0)
+                {
+                    stations[stationID].recievingCount--;
+                    if(stations[stationID].recievingCount == 0)
+                    {
+                        stations[stationID].isRecieving = false;
+                        stations[stationID].recievingCount =  -1;
+                    }
+                }
                 else if(curTick > messages[i].timeOfSending)
                 {
                     if(stationID == 1 && stationID != messages[i].recievingStation)
@@ -142,26 +156,31 @@ double network::probability()
 void network::sensingDistanceTicks(int ticks)
 {
     this->sensingTick = ticks;
+    checkAllSet();
 }
 
 void network::lengthOfCable(int len)
 {
     this->distance = len;
+    checkAllSet();
 }
 
 void network::numberOfTicks(int ticks)
 {
     this->runTime = ticks;
+    checkAllSet();
 }
 
 void network::messageLength(int len)
 {
     this->lengthOfMessage = len;
+    checkAllSet();
 }
 
 void network::probabilityOfMessage(int prob)
 {
-    this->probOfMessage = prob % 100;
+    this->probOfMessage = (double) prob / 100.00;
+    checkAllSet();
 }
 
 void network::run()
@@ -170,14 +189,19 @@ void network::run()
     int addTickTime;
     int tick = 0;
     bool messageCreated = false;
+    std::string file;
+    std::filesystem::path p = std::filesystem::current_path();
+    file.append(p.string());
+    file.append("\\output.csv");
+
     std::ofstream fout;
-    fout.open("output.csv");
+    fout.open(file);
     fout << "tick,source,destination,length" << std::endl;
 
     if(!fout.is_open())
         return;
 
-    while(tick <= this->runTime)
+    while(tick < this->runTime)
     {
         for(int i = 0; i < 3; i++)
         {
@@ -188,7 +212,7 @@ void network::run()
                 double numran = probability();
                 if(numran < this->probOfMessage)
                 {
-                    if(stations[i].isPassing && stations[i].passingTick == tick)
+                    if((stations[i].isPassing && stations[i].passingTick == tick) || stations[i].isRecieving)
                     {
                         addTickTime = getRandomNum(this->sensingTick);
                         stations[i].isPassing = false;
@@ -224,7 +248,7 @@ void network::run()
                             messages[j].recievingStation = randomNum;
                             messages[j].timeOfSending = tick + addTickTime;
                             messages[j].timeOfRecieving = tick + (this->distance * (abs(randomNum - i))) + addTickTime;
-                            messages[j].messagelen = getRandomNum(this->lengthOfMessage) + 1;
+                            messages[j].messagelen = getRandomNum(this->lengthOfMessage);
                             stations[i].isIdle = false;
                             if(messages[j].timeOfSending == tick)
                             {
@@ -265,8 +289,18 @@ void network::run()
                 }
             }
         }
-
         tick++;
     }
+    fout.close();
+}
 
+//Signals
+
+void network::checkAllSet()
+{
+    if(distance != NULL && sensingTick != NULL && runTime != NULL
+            && lengthOfMessage != NULL && probOfMessage != NULL)
+        emit allSet(true);
+    else
+        emit allSet(false);
 }

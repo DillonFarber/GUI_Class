@@ -37,11 +37,17 @@ void myPainter::paintEvent(QPaintEvent *event)
     paint.setWindow(0,-1024,1024,1050);
 
 //    paint.rotate(90);
-    for(int i = 0; i <= 58; i += 2){
-        if(i < 57)
+    int i = 0;
+    int mapSize = graphMap.size();
+
+    for(auto m : graphMap)
+    {
+
+        if(i < (mapSize - 3))
             paint.drawRect(i * 15 ,0,20,(-(this->graphMap.at(i + 89) + this->graphMap.at(i + 90))));
-        if(i == 58)
+        if(i == (mapSize - 2))
             paint.drawRect(i * 15 ,0,20,(-(this->graphMap.at(i + 89))));
+        i++;
     }
 
 

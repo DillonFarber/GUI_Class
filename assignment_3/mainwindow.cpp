@@ -109,7 +109,7 @@ MainWindow::MainWindow(QWidget *parent)
     totalTickLine->setPlaceholderText("3000-10000");
     conversions *convert = new conversions(totalTickLine);
 
-    connect(totalTickLine, SIGNAL(textChanged(const QString)), convert, SLOT(textToInt()));
+    connect(totalTickLine, SIGNAL(textChanged(QString)), convert, SLOT(textToInt()));
     connect(convert, SIGNAL(intReturn(int)), lcdTotalTick, SLOT(display(int)));
     connect(convert,SIGNAL(intReturn(int)),net,SLOT(numberOfTicks(int)));
 

@@ -67,6 +67,7 @@ private:
     QDockWidget lenDock;
     QDockWidget tickDock;
     QDockWidget sensingTick;
+    QDockWidget runDock;
 
     // My widgets
     void radioExlusive();
@@ -76,5 +77,6 @@ private:
     void maxTickEditBox();
     void createDock();
     void createStatusBar();
+    void runButtons();
 };
 #endif // MAINWINDOW_H

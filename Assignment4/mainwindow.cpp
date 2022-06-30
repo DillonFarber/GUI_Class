@@ -37,6 +37,7 @@ void MainWindow::setupDockWidgets()
     lengthCableSlider();
     maxTickEditBox();
     senseCarrierTick();
+    runButtons();
 }
 
 void MainWindow::createDock()
@@ -46,20 +47,32 @@ void MainWindow::createDock()
     addDockWidget(Qt::RightDockWidgetArea, &probDock);
     addDockWidget(Qt::TopDockWidgetArea, &lenDock);
     addDockWidget(Qt::BottomDockWidgetArea,&sensingTick);
+    addDockWidget(Qt::BottomDockWidgetArea,&runDock);
 }
 
 void MainWindow::createStatusBar()
 {
     QStatusBar *statBar = new QStatusBar;
-
+    QWidget *wd = new QWidget;
+    QLabel *spac1 = new QLabel;
+    QLabel *spac2 = new QLabel;
+    QGridLayout *layout = new QGridLayout;
     QPushButton *runButton = new QPushButton();
-    runButton->setText("Run");
-    runButton->
+    QPalette *palette = new QPalette;
+    palette->setColor(QPalette::Active, QPalette::Window, QColor::fromRgb(0,0,0));
+    palette->setColor(QPalette::Active,QPalette::WindowText, QColor::fromRgb(150,150,150));
 
-    statBar->addWidget(runButton,0);
+    runButton->setText("Run CSMA Sim");
+    runButton->setEnabled(false);
+    runButton->setAutoFillBackground(true);
+    runButton->setPalette(*palette);
+    statBar->addWidget(spac1, 1);
+    statBar->addWidget(spac2,1);
+    statBar->addWidget(runButton);
+
     statBar->show();
     setStatusBar(statBar);
-    runButton->setEnabled(false);
+
     connect(net, SIGNAL(allSet(bool)),runButton,SLOT(setEnabled(bool)));
     connect(runButton, SIGNAL(clicked()),net,SLOT(run()));
 
@@ -235,6 +248,30 @@ void MainWindow::senseCarrierTick()
 
     connect(maxTicSpin, SIGNAL(valueChanged(int)), lcdCarrierTick, SLOT(display(int)));
     connect(maxTicSpin, SIGNAL(valueChanged(int)),net,SLOT(sensingDistanceTicks(int)));
+}
+
+void MainWindow::runButtons()
+{
+    QWidget *wd = new QWidget;
+    QLabel *lb = new QLabel;
+    lb->setText("Running the CSMA Simulator\n(not allowed till all widgets set)");
+    QGridLayout *layout = new QGridLayout;
+    QPushButton *runButton = new QPushButton();
+    QPalette *palette = new QPalette;
+    palette->setColor(QPalette::Active, QPalette::Window, QColor::fromRgb(0,0,0));
+    palette->setColor(QPalette::Active,QPalette::WindowText, QColor::fromRgb(150,150,150));
+
+    runButton->setText("Run CSMA Sim");
+    runButton->setEnabled(false);
+    runButton->setAutoFillBackground(true);
+
+    layout->addWidget(lb,0,0,Qt::AlignCenter);
+    layout->addWidget(runButton,1,0,Qt::AlignCenter);
+    wd->setLayout(layout);
+    this->runDock.setWidget(wd);
+    this->runDock.setAllowedAreas(Qt::BottomDockWidgetArea);
+    connect(net, SIGNAL(allSet(bool)),runButton,SLOT(setEnabled(bool)));
+    connect(runButton, SIGNAL(clicked()),net,SLOT(run()));
 }
 
 //SLOTS
